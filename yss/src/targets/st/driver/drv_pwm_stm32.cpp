@@ -29,15 +29,7 @@
 
 #include <drv/Pwm.h>
 #include <yss/reg.h>
-#if defined(GD32F1)
-#include <targets/st/bitfield_stm32f103xx.h>
-#elif defined(STM32F767xx)
-#include <targets/st/bitfield_stm32f767xx.h>
-#elif defined(STM32F746xx)
-#include <targets/st/bitfield_stm32f746xx.h>
-#elif defined(STM32F446xx)
-#include <targets/st/bitfield_stm32f446xx.h>
-#endif
+#include <targets/st/bitfield.h>
 
 Pwm::Pwm(YSS_PWM_Peri *peri, const Drv::Setup drvSetup) : Drv(drvSetup)
 {
