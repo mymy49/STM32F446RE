@@ -127,8 +127,15 @@ void PwmCh1::setRatio(float ratio)
 	mPeri->CCR1 = ccr;
 }
 
-void PwmCh1::setCounter(int32_t  counter)
+void PwmCh1::setCompareValue(int32_t counter)
 {
+	int32_t arr = mPeri->ARR;
+
+	if(counter >= arr)
+		counter = arr;
+	else if(counter < 0)
+		counter = 0;
+
 	mPeri->CCR1 = counter;
 }
 
@@ -163,7 +170,7 @@ void PwmCh2::setRatio(float ratio)
 	mPeri->CCR2 = (uint16_t)((float)mPeri->ARR * ratio);
 }
 
-void PwmCh2::setCounter(int32_t  counter)
+void PwmCh2::setCompareValue(int32_t  counter)
 {
 	mPeri->CCR2 = counter;
 }
@@ -199,7 +206,7 @@ void PwmCh3::setRatio(float ratio)
 	mPeri->CCR3 = (uint16_t)((float)mPeri->ARR * ratio);
 }
 
-void PwmCh3::setCounter(int32_t  counter)
+void PwmCh3::setCompareValue(int32_t  counter)
 {
 	mPeri->CCR3 = counter;
 }
@@ -235,7 +242,7 @@ void PwmCh4::setRatio(float ratio)
 	mPeri->CCR4 = (uint16_t)((float)mPeri->ARR * ratio);
 }
 
-void PwmCh4::setCounter(int32_t  counter)
+void PwmCh4::setCompareValue(int32_t  counter)
 {
 	mPeri->CCR4 = counter;
 }
