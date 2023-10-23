@@ -21,28 +21,25 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include <bsp.h>
-#include <yss/instance.h>
+#ifndef DEV_SPEAKER__H_
+#define DEV_SPEAKER__H_
 
-void initializeBoard(void)
+#include <stdint.h>
+#include <yss/error.h>
+
+namespace Speaker
 {
-	using namespace define::gpio;
-
-	// USART2 초기화
-	gpioA.setAsAltFunc(2, altfunc::PA2_USART2_TX);
-	gpioA.setAsAltFunc(3, altfunc::PA3_USART2_RX);
+	// Speaker를 초기화 한다.
+	void initialize(void);
 	
-	usart2.enableClock();
-	usart2.initialize(115200, 128);
-	usart2.enableInterrupt();
-
-	// LED 초기화
-	Led::initialize();
-
-	// Key 초기화
-	Key::initialize();
-
-	// Speaker 초기화
-	Key::initialize();
+	// 16 kHz 샘플 / Mono / 16 Bit PCM *.WAV 파일 데이터를 재생한다.
+	// 내장 Flash에 저장된 Bin to Source 프로그램으로 파일이 통으로 포함된 형태의 것으로 한정한다.
+	//
+	// 반환
+	//		에러를 반환한다.
+	// const void *src
+	//		*.WAV의 포인터를 설정한다.
+	error play(const void *src);
 }
 
+#endif
