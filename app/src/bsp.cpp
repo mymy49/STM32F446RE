@@ -35,5 +35,8 @@ void initializeBoard(void)
 	usart2.enableClock();
 	usart2.initialize(115200, 128);
 	usart2.enableInterrupt();
+
+	// LED 초기화
+	Led::initialize();
 }
 

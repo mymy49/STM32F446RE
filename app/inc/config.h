@@ -86,7 +86,7 @@
 
 // PWM 활성화
 #define PWM1_ENABLE			false
-#define PWM2_ENABLE			false
+#define PWM2_ENABLE			true
 #define PWM3_ENABLE			false
 #define PWM4_ENABLE			false
 #define PWM5_ENABLE			false
