@@ -33,6 +33,26 @@ namespace Key
 		// gpio의 기본 상태가 입력상태이므로 특별히 초기화가 필요하지 않다.
 	}
 
+	bool getLeft(void)
+	{
+		return !gpioC.getInputData(0);
+	}
+
+	bool getRight(void)
+	{
+		return !gpioC.getInputData(1);
+	}
+
+	bool getCancel(void)
+	{
+		return !gpioC.getInputData(2);
+	}
+
+	bool getEnter(void)
+	{
+		return !gpioC.getInputData(3);
+	}
+
 	bool getUser(void)
 	{
 		return !gpioC.getInputData(13);
@@ -40,7 +60,7 @@ namespace Key
 
 	bool getAnyKey(void)
 	{
-		return (getUser());
+		return (getUser() || getLeft() || getRight() || getCancel() || getEnter());
 	}
 }
 
