@@ -43,6 +43,6 @@ void initializeBoard(void)
 	Key::initialize();
 
 	// Speaker 초기화
-	Key::initialize();
+	Speaker::initialize();
 }
 

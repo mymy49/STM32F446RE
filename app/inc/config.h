@@ -72,7 +72,7 @@
 #define CRC32_ENABLE		false
 
 // DAC 활성화
-#define DAC1_ENABLE			false
+#define DAC1_ENABLE			true
 
 // I2C 활성화
 #define I2C1_ENABLE			false
@@ -123,7 +123,7 @@
 #define TIM4_ENABLE			false
 #define TIM5_ENABLE			false
 #define TIM6_ENABLE			true
-#define TIM7_ENABLE			false
+#define TIM7_ENABLE			true
 #define TIM8_ENABLE			false
 #define TIM9_ENABLE			false
 #define TIM10_ENABLE		false
