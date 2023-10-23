@@ -38,5 +38,7 @@ void initializeBoard(void)
 
 	// LED 초기화
 	Led::initialize();
-}
+
+	// Key 초기화
+	Key::initialize();}
 

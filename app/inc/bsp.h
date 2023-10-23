@@ -25,6 +25,7 @@
 #define BSP__H_
 
 #include <dev/led.h>
+#include <dev/key.h>
 
 void initializeBoard(void);
 
