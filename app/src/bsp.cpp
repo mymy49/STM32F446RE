@@ -96,7 +96,7 @@ void setLcdBackLight(float dimming)
 void fadeinBackLight(void)
 {
 	// 백라이트를 Fade in 한다.
-	for(uint32_t i=0;i<100;i++)
+	for(uint32_t i=0;i<=100;i++)
 	{
 		setLcdBackLight((float)i/100.f);
 		thread::delay(5);
