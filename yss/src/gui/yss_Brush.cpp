@@ -464,14 +464,14 @@ void Brush::fillCircle(Position_t pos, uint16_t radius)
 		y = pos.y + i + 1;
 		if(y < mSize.height)
 		{
-			for(uint32_t x=sx;x<=ex;x++)
+			for(int32_t x=sx;x<=ex;x++)
 				drawDot(x, y);
 		}
 		
 		y = pos.y - i;
 		if(y >= 0)
 		{
-			for(uint32_t x=sx;x<=ex;x++)
+			for(int32_t x=sx;x<=ex;x++)
 				drawDot(x, y);
 		}
 	}
@@ -596,7 +596,7 @@ void Brush::fillTriangle(Position_t top, Position_t left, Position_t right)
 	}
 }
 
-void Brush::fillRect(Position_t pos, Size_t size, uint32_t color)
+void Brush::fillRectBase(Position_t pos, Size_t size, uint32_t color)
 {
 	int16_t sx = pos.x, ex = pos.x + size.width - 1, sy = pos.y, ey = pos.y + size.height - 1;
 	
@@ -612,12 +612,17 @@ void Brush::fillRect(Position_t pos, Size_t size, uint32_t color)
 	}
 }
 
+void Brush::fillRect(Position_t pos, Size_t size, uint32_t color)
+{
+	fillRectBase(pos, size, color);
+}
+
 void Brush::fillRect(Position_t pos, Size_t size, Color color)
 {
 	switch(mColorMode)
 	{
 	case COLOR_MODE_RGB888 :
-		fillRect(pos, size, color.getRgb888Code());
+		fillRectBase(pos, size, color.getRgb888Code());
 		break;
 	
 	default :
@@ -632,12 +637,12 @@ void Brush::fillRect(Position_t p1, Position_t p2)
 
 	translateFromPositionToSize(pos, size, p1, p2);
 
-	fillRect(pos, size, mBrushColor);
+	fillRectBase(pos, size, mBrushColor);
 }
 
 void Brush::fillRect(Position_t pos, Size_t size)
 {
-	fillRect(pos, size, mBrushColor);
+	fillRectBase(pos, size, mBrushColor);
 }
 
 void Brush::eraseRectangle(Position_t p1, Position_t p2)
@@ -647,17 +652,17 @@ void Brush::eraseRectangle(Position_t p1, Position_t p2)
 
 	translateFromPositionToSize(pos, size, p1, p2);
 
-	fillRect(pos, size, mBgColor);
+	fillRectBase(pos, size, mBgColor);
 }
 
 void Brush::eraseRectangle(Position_t pos, Size_t size)
 {
-	fillRect(pos, size, mBgColor);
+	fillRectBase(pos, size, mBgColor);
 }
 
 void Brush::fill(void)
 {
-	fillRect(Position_t{0, 0}, mSize);
+	fillRectBase(Position_t{0, 0}, mSize, mBrushColor);
 }
 
 void Brush::clear(void)
