@@ -21,44 +21,54 @@
 	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include "../inc/task.h"
 #include <yss.h>
-#include <bsp.h>
-#include <task.h>
+#include <util/key.h>
 
-void thread_blinkLed(void);
+#define MAX_TASK_THREAD		4
 
-int main(void)
+namespace Task
 {
-	// 운영체체 초기화
-	initializeYss();
-	
-	// 보드 초기화
-	initializeBoard();
+	uint32_t gThreadCnt;
+	threadId gThreadId[MAX_TASK_THREAD];
+	FunctionQueue *gFq;
+	Mutex gMutex;
 
-	// Function Queue 기능을 활용하여 순차 처리를 한다.
-	fq.start();
-	fq.add(Task::displayLogo);		// 로고 출력
-	//fq.add(Task::handleMainPage);		// 메인 페이지 처리
-	//fq.add(Task::handleFileExplorer);	// 메인 페이지 처리
-	
-	// LED 깜박이는 쓰레드를 스케줄러에 등록
-	thread::add(thread_blinkLed, 512);
-
-	while(1)
+	void setFunctionQueue(FunctionQueue &obj)
 	{
-		thread::yield();
+		gFq = &obj;
 	}
-}
 
-void thread_blinkLed(void)
-{
-	while(1)
+	void lock(void)
 	{
-		Led::on(true, 400);
-		thread::delay(500);
+		gMutex.lock();
+	}
 
-		Led::on(false, 400);
-		thread::delay(500);
+	void unlock(void)
+	{
+		gMutex.unlock();
+	}
+
+	void addThread(void (*func)(void), uint32_t stackSize)
+	{
+		if(gThreadCnt < MAX_TASK_THREAD)
+			gThreadId[gThreadCnt++] = thread::add(func, stackSize);
+	}
+
+	void clearTask(void)
+	{
+		key::clear();
+
+		for(uint32_t i=0;i<gThreadCnt;i++)
+		{
+			if(gThreadId[i])
+			{
+				thread::remove(gThreadId[i]);
+				gThreadId[i] = 0;
+			}
+		}
+
+		gThreadCnt = 0;
 	}
 }
 
