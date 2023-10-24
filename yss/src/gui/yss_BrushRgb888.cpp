@@ -70,4 +70,24 @@ void BrushRgb888::drawDot(int16_t x, int16_t y, uint32_t color)
 	*des++ = *src++;
 }
 
+void BrushRgb888::fillRectBase(Position_t pos, Size_t size, uint32_t color)
+{
+	int16_t sx = pos.x, ex = pos.x + size.width - 1, sy = pos.y, ey = pos.y + size.height - 1;
+	uint32_t offset;
+	uint8_t *des = (uint8_t*)mFrameBuffer;
+
+	if (ey > mSize.height - 1)
+		ey = mSize.height - 1;
+	if (ex > mSize.width - 1)
+		ex = mSize.width - 1;
+
+	des += sx * 3 + sy * mSize.width * 3;
+	offset = mSize.width * 3;
+	for (int16_t y = sy; y <= ey; y++)
+	{
+		copyRgb888DotPattern(des, color, size.width);
+		des += offset;
+	}
+}
+
 #endif

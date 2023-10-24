@@ -150,7 +150,9 @@ public:
 	void fillCircle(Position_t p1, uint16_t r);
 
 	
-	virtual void fillRect(Position_t pos, Size_t size, uint32_t color);
+	virtual void fillRectBase(Position_t pos, Size_t size, uint32_t color);
+
+	void fillRect(Position_t pos, Size_t size, uint32_t color);
 
 	void fillRect(Position_t pos, Size_t size, Color color);
 
