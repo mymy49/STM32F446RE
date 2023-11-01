@@ -70,7 +70,7 @@ error Bmp888Buffer::setSize(Size_t size)
 	return error::ERROR_NONE;
 }
 
-Bmp888 *Bmp888Buffer::getBmp888(void)
+Bitmap_t *Bmp888Buffer::getBitmap(void)
 {
 	return &mBmp888;
 }
