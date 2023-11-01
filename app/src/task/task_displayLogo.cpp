@@ -47,13 +47,13 @@ namespace Task
 		
 		frame.setSize(480, 2);	// 가로선을 그리기 위해 프레임 버퍼의 크기를 조절한다.
 		frame.clear();			// frame을 배경색으로 채운다.
-		lcd.drawBmp({0, 120}, frame.getBmp888());	// 네모 박스의 위쪽 가로선을 그린다.
-		lcd.drawBmp({0, 200}, frame.getBmp888());	// 네모 박스의 아래쪽 가로선을 그린다.
+		lcd.drawBitmap({0, 120}, frame.getBitmap());	// 네모 박스의 위쪽 가로선을 그린다.
+		lcd.drawBitmap({0, 200}, frame.getBitmap());	// 네모 박스의 아래쪽 가로선을 그린다.
 
 		frame.setSize(2, 80);	// 세로선을 그리기 위해 프레임 버퍼의 크기를 조절한다.
 		frame.clear();
-		lcd.drawBmp({0, 120}, frame.getBmp888());	// 네모 박스의 왼쪽 세로선을 그린다.
-		lcd.drawBmp({478, 120}, frame.getBmp888());	// 네모 박스의 오른쪽 세로선을 그린다.
+		lcd.drawBitmap({0, 120}, frame.getBitmap());	// 네모 박스의 왼쪽 세로선을 그린다.
+		lcd.drawBitmap({478, 120}, frame.getBitmap());	// 네모 박스의 오른쪽 세로선을 그린다.
 
 		// 제목
 		frame.setSize(300, 20);
@@ -62,7 +62,7 @@ namespace Task
 		frame.setFont(Font_Noto_Sans_CJK_HK_Medium_18);
 		frame.setFontColor(0x00, 0x00, 0x00);
 		frame.drawString({0, 0}, "yss Embedded Operating System");
-		lcd.drawBmp({10, 40 + 120}, frame.getBmp888());
+		lcd.drawBitmap({10, 40 + 120}, frame.getBitmap());
 
 		// Cafe
 		frame.setSize(50, 14);
@@ -71,7 +71,7 @@ namespace Task
 		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_12);
 		frame.setFontColor(0x00, 0x00, 0x00);
 		frame.drawString({0, 0}, "Cafe");
-		lcd.drawBmp({10, 10 + 120}, frame.getBmp888());
+		lcd.drawBitmap({10, 10 + 120}, frame.getBitmap());
 
 		// 주소
 		frame.setSize(250, 12);
@@ -80,7 +80,7 @@ namespace Task
 		frame.setFont(Font_Noto_Sans_CJK_HK_DemiLight_10);
 		frame.setFontColor(0x00, 0x00, 0x00);
 		frame.drawString({0, 0}, "http://cafe.naver.com/yssoperatingsystem");
-		lcd.drawBmp({10, 60 + 120}, frame.getBmp888());
+		lcd.drawBitmap({10, 60 + 120}, frame.getBitmap());
 		
 		// 컵 그리기
 		frame.setSize(90, 31);
@@ -95,7 +95,7 @@ namespace Task
 		frame.fillTriangle({0, 26}, {5, 30}, {5, 26});
 		frame.fillTriangle({74, 26}, {69, 30}, {69, 26});
 		frame.fillRect({5, 26}, Position_t{69, 30});
-		lcd.drawBmp({305, 49 + 120}, frame.getBmp888());
+		lcd.drawBitmap({305, 49 + 120}, frame.getBitmap());
 		
 		// 컵의 김 올라오는 것 그리기
 		frame.setSize(46, 22);
@@ -104,7 +104,7 @@ namespace Task
 		frame.setBrushColor(31, 145, 173);
 		frame.fillTriangle({0, 21}, {15, 0}, {30, 21});
 		frame.fillTriangle({45, 0}, {30, 21}, {15, 0});
-		lcd.drawBmp({324, 14 + 120}, frame.getBmp888());
+		lcd.drawBitmap({324, 14 + 120}, frame.getBitmap());
 
 		// 원 두 개 #1
 		frame.setSize(15, 15);
@@ -114,7 +114,7 @@ namespace Task
 		frame.fillCircle({9, 4}, 5);
 		frame.setBrushColor(0, 0, 0);
 		frame.drawCircle({4, 9}, 5);
-		lcd.drawBmp({244, 59 + 120}, frame.getBmp888());
+		lcd.drawBitmap({244, 59 + 120}, frame.getBitmap());
 
 		// 원 두 개 #2
 		frame.setSize(15, 15);
@@ -124,7 +124,7 @@ namespace Task
 		frame.fillCircle({9, 4}, 5);
 		frame.setBrushColor(0, 0, 0);
 		frame.drawCircle({4, 9}, 5);
-		lcd.drawBmp({286, 10 + 120}, frame.getBmp888());
+		lcd.drawBitmap({286, 10 + 120}, frame.getBitmap());
 
 		// 원 두 개 #3
 		frame.setSize(15, 15);
@@ -134,7 +134,7 @@ namespace Task
 		frame.fillCircle({9, 4}, 5);
 		frame.setBrushColor(0, 0, 0);
 		frame.drawCircle({4, 9}, 5);
-		lcd.drawBmp({445, 53 + 120}, frame.getBmp888());
+		lcd.drawBitmap({445, 53 + 120}, frame.getBitmap());
 
 		// 세모 두 개 #1
 		frame.setSize(15, 15);
@@ -144,7 +144,7 @@ namespace Task
 		frame.fillTriangle({4, 0}, {13, 1}, {10, 9});
 		frame.setBrushColor(0, 0, 0);
 		frame.drawTriangle({0, 1}, {9, 2}, {6, 10});
-		lcd.drawBmp({235, 18 + 120}, frame.getBmp888());
+		lcd.drawBitmap({235, 18 + 120}, frame.getBitmap());
 
 		// 세모 두 개 #2
 		frame.setSize(15, 15);
@@ -154,7 +154,7 @@ namespace Task
 		frame.fillTriangle({4, 0}, {13, 1}, {10, 9});
 		frame.setBrushColor(0, 0, 0);
 		frame.drawTriangle({0, 1}, {9, 2}, {6, 10});
-		lcd.drawBmp({392, 22 + 120}, frame.getBmp888());
+		lcd.drawBitmap({392, 22 + 120}, frame.getBitmap());
 		
 		// 지그제그 세개
 		frame.setSize(30, 5);
@@ -167,7 +167,7 @@ namespace Task
 		frame.drawLine({14, 0}, {19, 4});
 		frame.drawLine({19, 4}, {24, 0});
 		frame.drawLine({24, 0}, {29, 4});
-		lcd.drawBmp({412, 37 + 120}, frame.getBmp888());
+		lcd.drawBitmap({412, 37 + 120}, frame.getBitmap());
 
 		// 십자
 		frame.setSize(10, 10);
@@ -176,7 +176,7 @@ namespace Task
 		frame.setBrushColor(0, 0, 0);
 		frame.drawLine({0, 4}, {9, 4});
 		frame.drawLine({4, 0}, {4, 9});
-		lcd.drawBmp({434, 11 + 120}, frame.getBmp888());
+		lcd.drawBitmap({434, 11 + 120}, frame.getBitmap());
 
 		lcd.unlock();
 		
