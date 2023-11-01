@@ -35,7 +35,7 @@ class Bmp888Buffer : public BrushRgb888
   protected:
 	uint32_t mBufferSize;
 	bool mOkFlag;
-	Bmp888 mBmp888;
+	Bitmap_t mBmp888;
 
   public:
 	Bmp888Buffer(uint32_t pointSize);
@@ -46,7 +46,7 @@ class Bmp888Buffer : public BrushRgb888
 
 	virtual error setSize(Size_t size);
 
-	Bmp888 *getBmp888(void);
+	Bitmap_t *getBitmap(void);
 
 	uint32_t getBufferSize(void);
 
