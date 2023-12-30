@@ -25,35 +25,38 @@
 
 #include <drv/mcu.h>
 
-#if defined(STM32F4_N) || defined(STM32F7_N)
+#if defined(STM32F0) || defined(STM32F7) || defined(STM32G4)
 
-#include <yss/instance.h>
-#include <config.h>
+#include <drv/peripheral.h>
+#include <drv/Usart.h>
+#include <yss/reg.h>
+#include <yss/thread.h>
+#include <targets/st/bitfield.h>
 
-#if defined(STM32F446xx)
-#include <targets/st/bitfield_stm32f446xx.h>
-#elif defined(STM32F746xx)
-#include <targets/st/bitfield_stm32f746xx.h>
-#endif
-
-#if defined(CRC) && CRC32_ENABLE
-static void setClockEn(bool en)
+Usart::Usart(const Drv::Setup_t drvSetup, const Uart::Setup_t setup) : Uart(drvSetup, setup)
 {
-	clock.lock();
-	clock.enableAhb1Clock(RCC_AHB1ENR_CRCEN_Pos);
-	clock.unlock();
+
 }
 
-static const Drv::Config gDrvConfig
+void Usart::enableSck(bool en)
 {
-	setClockEn,	//void (*clockFunc)(bool en);
-	0,			//void (*nvicFunc)(bool en);
-	0,			//void (*resetFunc)(void);
-	0			//uint32_t (*getClockFunc)(void);
-};
+	bool ue = getBitData(mDev->CR1, USART_CR1_UE_Pos);
 
-Crc32 crc32((YSS_CRC32_Dev*)CRC, gDrvConfig);
-#endif
+	if(ue)
+	{
+		setBitData(mDev->CR1, false, USART_CR1_UE_Pos);
+	}
+	
+	if(en)
+		mDev->CR2 |= USART_CR2_CLKEN_Msk | USART_CR2_LBCL_Msk;
+	else
+		mDev->CR2 &= ~(USART_CR2_CLKEN_Msk | USART_CR2_LBCL_Msk);
+
+	if(ue)
+	{
+		setBitData(mDev->CR1, true, USART_CR1_UE_Pos);
+	}
+}
 
 #endif
 

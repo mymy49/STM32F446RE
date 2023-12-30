@@ -18,7 +18,7 @@
 
 #include <drv/peripheral.h>
 
-#if defined(STM32F7_N)
+#if defined(STM32F7) || defined(STM32F4)
 
 #include <stdint.h>
 #include <drv/peripheral.h>
@@ -51,7 +51,7 @@ enum
 
 void thread_taskSdmmc(void *var);
 
-Sdmmc::Sdmmc(const Drv::Config &drvConfig, const Config &config) : Drv(drvConfig)
+Sdmmc::Sdmmc(const Drv::Setup_t &drvConfig, const Config &config) : Drv(drvConfig)
 {
 	mPeri = config.peri;
 	mTxDma = &config.txDma;
@@ -66,16 +66,6 @@ error Sdmmc::initialize(void)
 	mPeri->CLKCR |= SDMMC_CLKCR_HWFC_EN_Msk | SDMMC_CLKCR_PWRSAV_Msk;
 
 	return error::ERROR_NONE;
-}
-
-void Sdmmc::lock(void)
-{
-	Mutex::lock();
-}
-
-void Sdmmc::unlock(void)
-{
-	Mutex::unlock();
 }
 
 #define SHORT_RESP 1
