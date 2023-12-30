@@ -25,7 +25,7 @@
 
 #include <drv/peripheral.h>
 
-#if defined(GD32F1) || defined(STM32F1_N)
+#if defined(GD32F1) || defined(STM32F1)
 
 #include <drv/Gpio.h>
 #include <yss/reg.h>
@@ -47,7 +47,7 @@ inline void setGpioMode(YSS_GPIO_Peri *port, uint8_t pin, uint8_t val)
 	setFieldData(reg[index], 0x3UL << pin, val, pin);
 }
 
-Gpio::Gpio(const Drv::Setup drvSetup, const Setup setup) : GpioBase(drvSetup)
+Gpio::Gpio(const Drv::Setup_t drvSetup, const Setup_t setup) : GpioBase(drvSetup)
 {
 	mDev = setup.dev;
 	mExti = setup.exti;
